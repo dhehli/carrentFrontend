@@ -1,0 +1,13 @@
+<div *ngIf="sachbearbeiter">
+  <h2>{{sachbearbeiter.name}} details!</h2>
+  <div class="form-group">
+    <label for="klassenName">Vorname</label>
+    <input type="text" class="form-control" id="klassenName" placeholder="Enter Vorname" [(ngModel)]="sachbearbeiter.vorName">
+  </div>
+  <div class="form-group">
+    <label for="tagesgebuehr">Name</label>
+    <input type="text" class="form-control" id="tagesgebuehr" placeholder="Enter Name"  [(ngModel)]="sachbearbeiter.name">
+  </div>
+  <button (click)="goBack()" class="btn">Back</button>
+  <button (click)="save()" class="btn btn-primary">Save</button>
+</div>

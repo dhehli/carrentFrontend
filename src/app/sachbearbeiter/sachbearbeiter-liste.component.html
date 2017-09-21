@@ -1,0 +1,34 @@
+<div>
+  <div class="form-group">
+    <label>Vorname</label>
+    <input type="text" #vorname class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="tagesgebuehr">Name</label>
+    <input type="text" #name class="form-control">
+  </div>
+  <button class="btn btn-success" (click)="add(vorname.value, name.value);">
+    Add
+  </button>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Vorname</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sb of sachbearbeiter">
+      <td>{{sb.id}}</td>
+      <td>{{sb.vorName}}</td>
+      <td>{{sb.name}}</td>
+      <td><a [routerLink]="['/sachbearbeiter', sb.id]">Detail</a></td>
+      <td>  <button class="delete"
+          (click)="delete(sachbearbeiter); $event.stopPropagation()">x</button></td>
+    </tr>
+  </tbody>
+</table>

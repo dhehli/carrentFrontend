@@ -1,0 +1,40 @@
+<div>
+  <div class="form-group">
+    <label>Klasse</label>
+    <select #klasse class="form-control">
+      <option *ngFor="let k of klassen" [value]="k.id">{{k.klassenName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Marke</label>
+    <input type="text" #marke class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="tagesgebuehr">typ</label>
+    <input type="text" #typ class="form-control">
+  </div>
+  <button class="btn btn-success" (click)="add(marke.value, typ.value, klasse.value);">
+    Add
+  </button>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Marke</th>
+      <th>Typ</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let auto of autos">
+      <td>{{auto.id}}</td>
+      <td>{{auto.marke}}</td>
+      <td>{{auto.typ}}</td>
+      <td><a [routerLink]="['/auto', auto.id]">Detail</a></td>
+      <td>  <button class="delete"
+          (click)="delete(auto); $event.stopPropagation()">x</button></td>
+    </tr>
+  </tbody>
+</table>

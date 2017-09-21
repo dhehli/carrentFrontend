@@ -3,31 +3,30 @@ import { Component, OnInit }        from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 
-import { Hero }        from './hero';
-import { HeroService } from './hero.service';
+import { Klasse }        from './klasse';
+import { KlasseService } from './klasse.service';
 
 @Component({
-  selector: 'hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: [ './hero-detail.component.css' ]
+  selector: 'klasse-detail',
+  templateUrl: './klasse-detail.component.html'
 })
-export class HeroDetailComponent implements OnInit {
-  hero: Hero;
+export class KlasseDetailComponent implements OnInit {
+  klasse: Klasse;
 
   constructor(
-    private heroService: HeroService,
+    private klasseService: KlasseService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id')))
-      .subscribe(hero => this.hero = hero);
+      .switchMap((params: ParamMap) => this.klasseService.getKlasse(+params.get('id')))
+      .subscribe(klasse => this.klasse = klasse);
   }
 
   save(): void {
-    this.heroService.update(this.hero)
+    this.klasseService.update(this.klasse)
       .then(() => this.goBack());
   }
 

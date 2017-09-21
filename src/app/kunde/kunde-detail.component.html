@@ -1,0 +1,31 @@
+<div *ngIf="kunde">
+  <h2>{{kunde.name}} details!</h2>
+  <div class="form-group">
+    <label>Sachbearbeiter</label>
+    <select #sachbearbeiter class="form-control">
+      <option *ngFor="let sb of sachbearbeiterAll" [value]="sb.id" [selected]="sb.id == kunde.sachBearbeiter.id ? true : null">{{sb.vorName}} {{sb.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="marke">Vorname</label>
+    <input type="text" class="form-control" id="vorname" placeholder="Enter Vorname" [(ngModel)]="kunde.vorname">
+  </div>
+  <div class="form-group">
+    <label for="marke">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="kunde.name">
+  </div>
+  <div class="form-group">
+    <label for="marke">Strasse</label>
+    <input type="text" class="form-control" id="strasse" placeholder="Enter Strasse" [(ngModel)]="kunde.strasse">
+  </div>
+  <div class="form-group">
+    <label for="marke">PLZ</label>
+    <input type="number" class="form-control" id="plz" placeholder="Enter Strasse" [(ngModel)]="kunde.plz">
+  </div>
+  <div class="form-group">
+    <label for="marke">Ort</label>
+    <input type="text" class="form-control" id="ort" placeholder="Enter StraOrtsse" [(ngModel)]="kunde.ort">
+  </div>
+  <button (click)="goBack()" class="btn">Back</button>
+  <button (click)="save(sachbearbeiter.value)" class="btn btn-primary">Save</button>
+</div>

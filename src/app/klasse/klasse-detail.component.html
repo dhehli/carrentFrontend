@@ -1,0 +1,13 @@
+<div *ngIf="klasse">
+  <h2>{{klasse.klassenName}} details!</h2>
+  <div class="form-group">
+    <label for="klassenName">Klassenname</label>
+    <input type="text" class="form-control" id="klassenName" placeholder="Enter Klassenname" [(ngModel)]="klasse.klassenName">
+  </div>
+  <div class="form-group">
+    <label for="tagesgebuehr">Klassenname</label>
+    <input type="number" class="form-control" id="tagesgebuehr" placeholder="Enter Preis"  [(ngModel)]="klasse.tagesgebuehr">
+  </div>
+  <button (click)="goBack()" class="btn">Back</button>
+  <button (click)="save()" class="btn btn-primary">Save</button>
+</div>

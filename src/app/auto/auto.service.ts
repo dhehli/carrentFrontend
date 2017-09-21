@@ -3,54 +3,56 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Hero } from './hero';
+import { Auto } from './auto';
 
 @Injectable()
-export class HeroService {
+export class AutoService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'api/heroes';  // URL to web api
+  private url = 'http://localhost:8080/restAPI/auto';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
+  getAutos(): Promise<Auto[]> {
+    return this.http.get(this.url)
                .toPromise()
-               .then(response => response.json().data as Hero[])
+               .then(response => JSON.parse(response.text()) as Auto[])
                .catch(this.handleError);
   }
 
-
-  getHero(id: number): Promise<Hero> {
-    const url = `${this.heroesUrl}/${id}`;
+  getAuto(id: number): Promise<Auto> {
+    const url = `${this.url}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Hero)
+      .then(response => JSON.parse(response.text()) as Auto)
       .catch(this.handleError);
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.heroesUrl}/${id}`;
+    const url = `${this.url}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<Hero> {
+  create(marke: string, typ: string, klasseId: number): Promise<any> {
     return this.http
-      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.url, JSON.stringify(
+        {marke: marke, typ: typ, klasse: {id: klasseId}}
+      ), {headers: this.headers})
       .toPromise()
-      .then(res => res.json().data as Hero)
+      .then()
       .catch(this.handleError);
   }
 
-  update(hero: Hero): Promise<Hero> {
-    const url = `${this.heroesUrl}/${hero.id}`;
+  update(auto: Auto, klasseId: number): Promise<Auto> {
+    let data = {marke: auto.marke, typ: auto.typ, klasse: {id: klasseId}};
+    const url = `${this.url}/${auto.id}`;
     return this.http
-      .put(url, JSON.stringify(hero), {headers: this.headers})
+      .put(url, JSON.stringify(data), {headers: this.headers})
       .toPromise()
-      .then(() => hero)
+      .then(() => auto)
       .catch(this.handleError);
   }
 
@@ -59,4 +61,3 @@ export class HeroService {
     return Promise.reject(error.message || error);
   }
 }
-
