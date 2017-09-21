@@ -43,7 +43,7 @@ export class KundeListeComponent implements OnInit {
 
   delete(kunde: Kunde): void {
     this.kundeService
-        .delete(kunde.id)
+        .delete(kunde.kundenId)
         .then(() => {
           this.kunden = this.kunden.filter(h => h !== kunde);
           if (this.selectedKunde === kunde) { this.selectedKunde = null; }
